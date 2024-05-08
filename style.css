@@ -1,0 +1,368 @@
+/* Réinitialisation des styles pour tous les éléments */
+* {
+  box-sizing: border-box;
+}
+
+/* Définition de la hauteur de la page à 100% */
+html, body {
+  height: 100%;
+}
+
+/* Styles généraux du corps de la page */
+body {
+  background: black; /* Couleur de fond */
+  min-height: 100%; /* Hauteur minimale de la page */
+  font-family: "Arial", sans-serif; /* Police de caractères par défaut */
+  overflow-x: hidden; /* Masquer le défilement horizontal */
+  overflow-y: hidden; /* Masquer le défilement vertical */
+  zoom: 80%; /* Forcer le zoom */
+}
+
+/* Conteneur du bouton de réinitialisation */
+.reset-container {
+  position: relative; /* Position relative pour placer le bouton */
+  margin: 20px; /* Marge autour du conteneur */
+}
+
+/* Styles du bouton de réinitialisation */
+#resetLeaderboard {
+  background-color: #f44336; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  padding: 10px 20px; /* Espacement intérieur */
+  font-size: 16px; /* Taille de la police */
+  border: none; /* Supprimer la bordure */
+  border-radius: 5px; /* Arrondir les coins */
+  cursor: pointer; /* Curseur de la souris */
+  position: absolute; /* Position absolue par rapport au conteneur parent */
+  bottom: 0; /* Distance par rapport au bas du conteneur parent */
+  right: 0; /* Distance par rapport à la droite du conteneur parent */
+}
+
+/* Effet de survol du bouton de réinitialisation */
+#resetLeaderboard:hover {
+  background-color: #d32f2f; /* Couleur de fond au survol */
+}
+
+/* Conteneur principal */
+.wrap {
+  position: relative; /* Position relative pour le contenu */
+  height: 100%; /* Hauteur de 100% */
+  min-height: 500px; /* Hauteur minimale */
+  padding-bottom: 20px; /* Marge inférieure */
+}
+
+/* Styles de la liste de leaderboard */
+.leaderboard {
+  text-align: center; /* Centrage du texte */
+  align-items: center; /* Centrage vertical */
+  color: white; /* Couleur du texte */
+}
+
+/* Styles de la zone de jeu */
+.game {
+  transform-style: preserve-3d; /* Préserver le style de transformation 3D */
+  perspective: 500px; /* Perspective 3D */
+  min-height: 100%; /* Hauteur minimale de 100% */
+  height: 100%; /* Hauteur de 100% */
+}
+
+/* Définition de l'animation pour le match */
+@keyframes matchAnim {
+  0% {
+    background: #44bb44; /* Couleur de fond au début de l'animation */
+  }
+  100% {
+    background: #444444; /* Couleur de fond à la fin de l'animation */
+  }
+}
+
+/* Styles des cartes */
+.card {
+  float: left; /* Alignement à gauche */
+  width: 16.66666%; /* Largeur de 1/6 */
+  height: 25%; /* Hauteur de 25% */
+  padding: 5px; /* Espacement intérieur */
+  text-align: center; /* Centrage du texte */
+  display: block; /* Affichage en tant que bloc */
+  perspective: 500px; /* Perspective 3D */
+  position: relative; /* Position relative */
+  cursor: pointer; /* Curseur de la souris */
+  z-index: 50; /* Index de z */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* Couleur de mise en évidence au clic */
+}
+
+/* Styles de l'intérieur de la carte */
+.card .inside {
+  width: 100%; /* Largeur de 100% */
+  height: 100%; /* Hauteur de 100% */
+  display: block; /* Affichage en tant que bloc */
+  transform-style: preserve-3d; /* Préserver le style de transformation 3D */
+  transition: 0.4s ease-in-out; /* Transition fluide */
+  background: #444444; /* Couleur de fond */
+}
+
+/* Styles lorsque la carte est sélectionnée ou correspondante */
+.card .inside.picked, .card .inside.matched {
+  transform: rotateY(180deg); /* Rotation de 180 degrés */
+}
+
+/* Styles lorsque la carte correspondante */
+.card .inside.matched {
+  animation: 1s matchAnim ease-in-out; /* Animation */
+  animation-delay: 0.4s; /* Délai de l'animation */
+}
+
+/* Styles de la face avant et de la face arrière des cartes */
+.card .front, .card .back {
+  border: 1px solid black; /* Bordure */
+  backface-visibility: hidden; /* Cacher la face arrière */
+  position: absolute; /* Position absolue */
+  top: 0; /* Distance par rapport au haut */
+  left: 0; /* Distance par rapport à la gauche */
+  width: 100%; /* Largeur de 100% */
+  height: 100%; /* Hauteur de 100% */
+  padding: 20px; /* Espacement intérieur */
+}
+
+/* Styles de la face avant */
+.card .front img, .card .back img {
+  max-width: 100%; /* Largeur maximale */
+  display: block; /* Affichage en tant que bloc */
+  margin: 0 auto; /* Marge automatique */
+  max-height: 100%; /* Hauteur maximale */
+}
+
+/* Styles de la face avant */
+.card .front {
+  transform: rotateY(-180deg); /* Rotation de -180 degrés */
+}
+
+/* Styles de la face arrière */
+.card .back {
+  padding: 10px; /* Espacement intérieur */
+}
+
+/* Styles de la face avant pour les écrans plus petits */
+@media (max-width: 800px) {
+  .card .front {
+    padding: 5px; /* Espacement intérieur */
+  }
+}
+
+/* Styles de la face arrière pour les écrans plus petits */
+@media (max-width: 800px) {
+  .card .back {
+    padding: 10px; /* Espacement intérieur */
+  }
+}
+
+/* Styles de la face avant pour centrer le contenu */
+.front {
+  display: flex; /* Affichage flex */
+  justify-content: center; /* Centrage horizontal */
+  align-items: center; /* Centrage vertical */
+}
+
+/* Styles de l'image de la face avant */
+.front img{
+  width: 150px; /* Largeur */
+  height: 150px; /* Hauteur */
+  text-align: center; /* Centrage horizontal */
+}
+
+/* Overlay pour les modals */
+.modal-overlay {
+  display: none; /* Masquer par défaut */
+  position: fixed; /* Position fixe */
+  top: 0; /* Distance par rapport au haut */
+  left: 0; /* Distance par rapport à la gauche */
+  width: 100%; /* Largeur de 100% */
+  height: 100%; /* Hauteur de 100% */
+  background:white; /* Couleur de fond */
+}
+
+/* Styles de la modal */
+.modal {
+  display: none; /* Masquer par défaut */
+  position: fixed; /* Position fixe */
+  width: 500px; /* Largeur */
+  margin: auto; /* Marge automatique */
+  top: 20px; /* Distance par rapport au haut */
+  left: 0; /* Distance par rapport à la gauche */
+  right: 0; /* Distance par rapport à la droite */
+  background: white; /* Couleur de fond */
+  padding: 30px 10px; /* Espacement intérieur */
+  z-index: 1000; /* Index de z */
+  overflow-y: auto; /* Défilement vertical automatique */
+}
+
+/* Styles du titre de la modal */
+.modal .winner {
+  font-size: 80px; /* Taille de police */
+  text-align: center; /* Centrage du texte */
+  font-family: "Anton", sans-serif; /* Police de caractères */
+  color: #4d4d4d; /* Couleur du texte */
+  text-shadow: 0px 3px 0 black; /* Ombre du texte */
+}
+
+/* Styles du bouton de redémarrage de la modal */
+.modal .restart {
+  font-family: "Anton", sans-serif; /* Police de caractères */
+  margin: 30px auto; /* Marge */
+  padding: 20px 30px; /* Espacement intérieur */
+  display: block; /* Affichage en tant que bloc */
+  font-size: 30px; /* Taille de police */
+  border: none; /* Supprimer la bordure */
+  background: #4d4d4d; /* Couleur de fond */
+  background: linear-gradient(#4d4d4d, #222); /* Dégradé de fond */
+  border: 1px solid #222; /* Bordure */
+  border-radius: 5px; /* Arrondir les coins */
+  color: white; /* Couleur du texte */
+  text-shadow: 0px 1px 0 black; /* Ombre du texte */
+  cursor: pointer; /* Curseur de la souris */
+}
+
+/* Effet de survol du bouton de redémarrage */
+.modal .restart:hover {
+  background: linear-gradient(#222, black); /* Dégradé de fond au survol */
+}
+
+/* Styles du message de la modal */
+.modal .message {
+  text-align: center; /* Centrage du texte */
+}
+
+/* Styles du lien dans le message de la modal */
+.modal .message a {
+  text-decoration: none; /* Supprimer la décoration du lien */
+  color: #28afe6; /* Couleur du lien */
+  font-weight: bold; /* Gras */
+}
+
+/* Effet de survol du lien dans le message de la modal */
+.modal .message a:hover {
+  color: #56c0eb; /* Couleur du lien au survol */
+  border-bottom: 1px dotted #56c0eb; /* Bordure inférieure pointillée */
+}
+
+/* Styles du texte du nombre de flips dans la modal */
+.modal .flips-text {
+  text-align: center; /* Centrage du texte */
+  margin: 10px auto; /* Marge */
+}
+
+/* Titre de la modal de leaderboard */
+.modal-leaderboard-title {
+  font-size: 24px; /* Taille de police */
+  font-weight: bold; /* Gras */
+  margin-top: 20px; /* Marge supérieure */
+  background-color: white; /* Couleur de fond */
+  color: black; /* Couleur du texte */
+}
+
+/* Liste de leaderboard dans la modal */
+.modal-leaderboard {
+  list-style-type: none; /* Supprimer les puces */
+  padding: 0; /* Rembourrage */
+  margin: 0; /* Marge */
+  background-color: white; /* Couleur de fond */
+  color: black; /* Couleur du texte */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Police de caractères */
+}
+
+/* Élément de liste de leaderboard */
+.modal-leaderboard li {
+  margin-bottom: 10px; /* Marge inférieure */
+}
+
+/* Styles de la modal de création de pseudo */
+#pseudoModal {
+  display: none; /* Masquer par défaut */
+  position: fixed; /* Position fixe */
+  width: 30%; /* Largeur de 30% */
+  top: 50%; /* Distance par rapport au haut */
+  left: 50%; /* Distance par rapport à la gauche */
+  transform: translate(-50%, -50%); /* Décalage de 50% vers la gauche et le haut */
+  background-color: white; /* Couleur de fond */
+  padding: 20px; /* Espacement intérieur */
+  border-radius: 10px; /* Arrondir les coins */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Ombre */
+  z-index: 1000; /* Index de z */
+}
+
+/* Styles du titre de la modal de création de pseudo */
+#pseudoModal h2 {
+  text-align: center; /* Centrage du texte */
+  margin-bottom: 20px; /* Marge inférieure */
+}
+
+/* Styles de l'entrée de texte de la modal de création de pseudo */
+#pseudoInput {
+  width: calc(100% - 20px); /* Largeur */
+  padding: 10px; /* Espacement intérieur */
+  margin-bottom: 20px; /* Marge inférieure */
+  border-radius: 5px; /* Arrondir les coins */
+  border: 1px solid #ccc; /* Bordure */
+}
+
+/* Styles du bouton de soumission de la modal de création de pseudo */
+#pseudoSubmit {
+  display: block; /* Affichage en tant que bloc */
+  width: 100%; /* Largeur de 100% */
+  padding: 10px; /* Espacement intérieur */
+  background-color: #4CAF50; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  border: none; /* Supprimer la bordure */
+  border-radius: 5px; /* Arrondir les coins */
+  cursor: pointer; /* Curseur de la souris */
+}
+
+/* Effet de survol du bouton de soumission */
+#pseudoSubmit:hover {
+  background-color: #45a049; /* Couleur de fond au survol */
+}
+
+/* Pied de page */
+footer {
+  color: white; /* Couleur du texte */
+  height: 20px; /* Hauteur */
+  position: absolute; /* Position absolue */
+  bottom: 0; /* Distance par rapport au bas */
+  width: 100%; /* Largeur de 100% */
+  z-index: 0; /* Index de z */
+}
+
+/* Texte du pied de page */
+footer .disclaimer {
+  line-height: 20px; /* Hauteur de ligne */
+  font-size: 12px; /* Taille de police */
+  color: #727272; /* Couleur du texte */
+  text-align: center; /* Centrage du texte */
+}
+
+/* Styles du titre */
+.title {
+  color: white; /* Couleur du texte */
+  text-align: center; /* Centrage du texte */
+  margin-bottom: 70px; /* Marge inférieure */
+  margin-top: 70px; /* Marge supérieure */
+}
+
+/* Effet de survol pour les cartes */
+.card:hover::before {
+  content: ""; /* Contenu vide */
+  position: absolute; /* Position absolue */
+  top: 0; /* Distance par rapport au haut */
+  left: 0; /* Distance par rapport à la gauche */
+  width: 100%; /* Largeur de 100% */
+  height: 100%; /* Hauteur de 100% */
+  transition: opacity 0.3s ease-in-out; /* Transition fluide */
+  pointer-events: none; /* Éviter que l'élément lumineux ne bloque les interactions */
+}
+
+/* Effet de survol des cartes */
+.card:hover {
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8); /* Ombre */
+  filter: brightness(110%); /* Luminosité augmentée */
+  transition: box-shadow 0.3s ease-in-out, filter 0.3s ease-in-out; /* Transition fluide */
+}

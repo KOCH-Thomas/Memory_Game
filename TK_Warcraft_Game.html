@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="FR">
+<head>
+  <meta charset="UTF-8">
+  <title>TK - World of Warcraft Memory Class</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Liens vers les polices Google et la feuille de style -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Anton">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <!-- Lien vers la bibliothèque jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+  <!-- Conteneur du bouton de réinitialisation -->
+  <div class="reset-container">
+    <button id="resetLeaderboard">Réinitialiser le Leaderboard</button>
+  </div>
+  
+  <!-- Modal pour saisir le pseudo -->
+  <div class="pseudoModal" id="pseudoModal">
+    <div class="modal-content">
+      <h2>Entrez Votre Alias</h2>
+      <!-- Champ de saisie du pseudo -->
+      <input type="text" id="pseudoInput" placeholder="Alias">
+        <!-- Ajouter des options de difficulté -->
+      <select id="difficultySelect">
+        <option value="normal">Normal</option>
+        <option value="heroic">Héroïque</option>
+        <option value="mythic">Mythique</option>
+      </select>
+      <!-- Bouton de validation du pseudo -->
+      <button id="pseudoSubmit">Valider</button>
+    </div>
+  </div>
+
+  <!-- Titre du jeu -->
+  <h1 class="title" id="title">TK - Warcraft Memory Cards Game</h1>
+  <!-- Conteneur principal -->
+  <div class="wrap">
+    <!-- Zone de jeu -->
+    <div class="game"></div>
+    <!-- Overlay pour les modals -->
+    <div class="modal-overlay">
+      <!-- Modal de victoire ou de fin de jeu -->
+      <div class="modal">
+        <!-- Le contenu de la modal sera ajouté dynamiquement -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Chargement du script JavaScript -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Récupérer le sélecteur de difficulté
+  var difficultySelect = document.getElementById("difficultySelect");
+  
+  // Fonction pour charger le fichier JavaScript correspondant au niveau de difficulté sélectionné
+  function loadDifficultyScript() {
+    var selectedDifficulty = difficultySelect.value;
+    var scriptSrc = "";
+    
+    // Déterminer le fichier JavaScript à charger en fonction de la difficulté sélectionnée
+    switch(selectedDifficulty) {
+      case "normal":
+        scriptSrc = "Normal.js";
+        break;
+      case "heroic":
+        scriptSrc = "Heroic.js";
+        break;
+      case "mythic":
+        scriptSrc = "Mythic.js";
+        break;
+      default:
+        scriptSrc = "Normal.js"; // Par défaut, charger le mode Normal
+        break;
+    }
+    
+    // Charger le fichier JavaScript correspondant
+    var scriptElement = document.createElement("script");
+    scriptElement.src = scriptSrc;
+    document.body.appendChild(scriptElement);
+  }
+  
+  // Charger le fichier JavaScript correspondant lorsque la page est chargée ou lorsque la difficulté est modifiée
+  loadDifficultyScript();
+  difficultySelect.addEventListener("change", loadDifficultyScript);
+});
+</script>
+  <!-- Élément audio pour la musique de fond -->
+  <audio id="backgroundMusic" loop>
+    <source src="src/Tavern.mp3" type="audio/mp3">
+  </audio>
+  <footer>
+    <span class="Copy">@Copyright KOCH 2024</span>
+  </footer>
+</body>
+</html>
